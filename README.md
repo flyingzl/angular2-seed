@@ -11,3 +11,6 @@ Angular2 seed project to help to run angular2 out of the box
 
 - run `gulp serve` 
 
+
+[screenshot.png](screenshoot)
+
