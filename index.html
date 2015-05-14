@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular2 seed</title>
+</head>
+<body>
+  <sample-app></sample-app>
+<script src="./node_modules/es6-module-loader/node_modules/traceur/bin/traceur-runtime.js"></script>
+<script src="./node_modules/zone.js/zone.js"></script>
+<script src="./node_modules/es6-module-loader/dist/es6-module-loader.js"></script>
+<script src="./node_modules/systemjs/dist/system.js"></script>
+<script>
+  System.paths = {
+    'angular2/*': './lib/angular/*.js',
+    'rtts_assert/*': './lib/rtts_assert/es6/src/*.js',
+    'app': './dev/app.js',
+    'services/*' : './dev/services/*.js'
+  };
+  System.import('app')
+    .then(function (app) {
+      app.main();
+    }, function (e) {
+      console.error('Boostrap angular2 failed!', e);
+    });
+</script>
+</body>
+</html>

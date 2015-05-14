@@ -1,0 +1,24 @@
+{
+  "name": "angular2-seed",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "author": "flyingzl(flyingzl@gmail.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-shell": "^0.4.0",
+    "gulp-traceur": "^0.17.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-open": "^0.3.2",
+    "gulp-shell": "^0.3.0"
+  },
+  "dependencies": {
+    "angular2": "2.0.0-alpha.13",
+    "es6-module-loader": "^0.15.0",
+    "rx": "2.4.6",
+    "rtts_assert": "^2.0.0-alpha.11",
+    "systemjs": "^0.15.0",
+    "zone.js": "^0.4.1"
+  }
+}

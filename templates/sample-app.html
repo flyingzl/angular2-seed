@@ -1,0 +1,51 @@
+<style>
+.sample-app-content {
+    font-family: Verdana;
+}
+.sample-app-content li,
+.sample-app-content p {
+    font-size: 1.2em;
+}
+.sample-app-content li {
+    font-family: Consolas;
+}
+.sample-app-content input,
+.sample-app-content button {
+    padding: 5px;
+    font-size: 1em;
+    outline: none;
+}
+
+.sample-app-content button.close{
+    -webkit-appearance: none;
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    font-size: 21px;
+    color: #000;
+    opacity: .2;
+}
+
+.sample-app-content button.close:hover{
+    opacity:1;
+    filter:alpha(opacity=100);
+}
+</style>
+
+<section class="sample-app-content">
+
+    <p>
+        恭喜您，Angular2顺利跑起来啦!
+    </p>
+
+    <p>
+        <input #newname>
+        <button (click)="addName(newname)">增加</button>
+    </p>
+    <ul>
+        <li *foreach="#name in names">{{name}} 
+            <button class="close" (click)="removeName(name)">&times;</button>
+        </li>
+    </ul>
+</section>
