@@ -44,7 +44,7 @@
         <button (click)="addName(newname)">增加</button>
     </p>
     <ul>
-        <li *foreach="#name in names">{{name}} 
+        <li *for="#name of names">{{name}} 
             <button class="close" (click)="removeName(name)">&times;</button>
         </li>
     </ul>

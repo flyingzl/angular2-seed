@@ -1,59 +1,83 @@
 'use strict';
 
-var gulp = require('gulp');
-var shell = require('gulp-shell');
-var traceur = require('gulp-traceur');
-var connect = require('gulp-connect');
-var open = require('gulp-open');
-var port = 3456;
+var gulp = require('gulp'),
+    del = require('del'),
+    plumber = require('gulp-plumber'),
+    rename = require('gulp-rename'),
+    traceur = require('gulp-traceur');
 
 
-var NG_PATH = './node_modules/angular2/es6/dev/';
-var RTT_PATH = './node_modules/rtts_assert/';
+var connect = require('gulp-connect'),
+    open = require('gulp-open'),
+    port = 3456;
 
+var PATHS = {
+    src: {
+      js: 'src/**/*.js',
+      html: 'src/**/*.html'
+    },
+    lib: [
+      'node_modules/gulp-traceur/node_modules/traceur/bin/traceur-runtime.js',
+      'node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.src.js',
+      'node_modules/systemjs/lib/extension-register.js',
+      'node_modules/angular2/node_modules/zone.js/dist/zone.js',
+      'node_modules/angular2/node_modules/zone.js/dist/long-stack-trace-zone.js',
+      'node_modules/reflect-metadata/Reflect.js'
+    ]
+};
 
-
-
-gulp.task('build:ng', shell.task([
-    'npm install',
-    'node ./es5build.js -s . -d ../../../../lib/angular'
-  ], {
-    cwd: NG_PATH
-  })
-);
-
-gulp.task('build:rtts', shell.task([
-    'npm install',
-    'node ./es6/es5build.js -d ./../../lib/rtts_assert'
-  ], {
-    cwd: RTT_PATH
-  })
-);
-
-gulp.task('build:angular', ['build:ng', 'build:rtts']);
-
-gulp.task('build', function () {
-  return gulp.src('./js/**/*.js')
-    .pipe(traceur({
-      sourceMaps: 'inline',
-      modules: 'instantiate',
-      annotations: true,
-      memberVariables: true,
-      typeAssertions: true,
-      typeAssertionModule: './lib/rtts_assert',
-      types: true
-    }))
-    .pipe(gulp.dest('./dev'));
-});
 
 gulp.task('watch', function () {
-  gulp.watch('./js/**', ['build']);
+  gulp.watch( PATHS.src.js, ['js'] );
 });
+
+gulp.task('js', function () {
+    return gulp.src(PATHS.src.js)
+        .pipe(rename({extname: ''})) //hack, see: https://github.com/sindresorhus/gulp-traceur/issues/54
+        .pipe(plumber())
+        .pipe(traceur({
+            modules: 'instantiate',
+            moduleName: true,
+            annotations: true,
+            types: true,
+            memberVariables: true
+        }))
+        .pipe(rename({extname: '.js'})) //hack, see: https://github.com/sindresorhus/gulp-traceur/issues/54
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('html', function () {
+    return gulp.src(PATHS.src.html)
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('angular2', function () {
+
+  var buildConfig = {
+    paths: {
+      "angular2/*": "node_modules/angular2/es6/prod/*.es6",
+      "rx": "node_modules/angular2/node_modules/rx/dist/rx.js"
+    }
+  };
+
+  var Builder = require('systemjs-builder');
+  var builder = new Builder(buildConfig);
+
+  return builder.build('angular2/angular2', 'dist/lib/angular2.js', {});
+});
+
+gulp.task('libs', ['angular2'], function () {
+    var size = require('gulp-size');
+    return gulp.src(PATHS.lib)
+      .pipe(size({showFiles: true, gzip: true}))
+      .pipe(gulp.dest('dist/lib'));
+});
+
 
 
 gulp.task('connect', function() {
   connect.server({
-    root: __dirname,
+    root: __dirname + '/dist',
     port: port,
     livereload: true
   });
@@ -67,7 +91,10 @@ gulp.task('open', function(){
   .pipe(open('', options));
 });
 
-
+gulp.task('build', ['js', 'html'])
+gulp.task('default', ['build', 'libs']);
 gulp.task('serve', ['connect', 'open']);
+gulp.task('clean', function(done) {
+  del(['dist'], done);
+});
 
-gulp.task('default', ['build:angular', 'build']);
