@@ -1,6 +1,40 @@
-<section class="sample-form-content">
-	<div [control-group]="form">
-		<input control="username" />
-		{{form.controls.username.value}}
-	</div>
-</section>
+<form class="form-horizontal" [control-group]="form" >
+    <div class="form-group" [class.has-error] = "form.controls.username.dirty&&!form.controls.username.valid">
+        <label class="col-sm-4 control-label required" for="user">Invitation Name</label>
+        <div class="col-sm-8">
+            <input required type="text" class="form-control" control="username" />
+            <div *if="form.controls.username.dirty && !form.controls.username.valid">
+                <p class="help-block" *if="form.controls.username.errors.required">
+                    User name is required.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" [class.has-error] = "form.controls.email.dirty&&!form.controls.email.valid">
+        <label class="col-sm-4 control-label required" for="email">Email</label>
+        <div class="col-sm-8">
+            <input required type="text" class="form-control" control="email" />
+            <div *if="form.controls.email.dirty && !form.controls.email.valid">
+                <p class="help-block" *if="form.controls.email.errors.required">
+                    Email is required.
+                </p>
+                <p class="help-block" *if="form.controls.email.errors.email">
+                    Email is not valid.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <button  [disabled]="!form.valid" class="btn btn-primary">Start Invitation</button>
+        </div>
+    </div>
+
+</form>
+
+
+

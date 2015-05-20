@@ -29,6 +29,7 @@ var PATHS = {
 
 gulp.task('watch', function () {
   gulp.watch( PATHS.src.js, ['js'] );
+  gulp.watch( PATHS.src.html, ['html'] );
 });
 
 gulp.task('js', function () {
