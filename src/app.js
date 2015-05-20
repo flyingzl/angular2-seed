@@ -1,16 +1,12 @@
 import {
 	ComponentAnnotation as Component, 
 	ViewAnnotation as View, 
-	coreDirectives,
 	For,
-	If,
 	bootstrap
 } from 'angular2/angular2';
 
-import { FormBuilder, Validators, formDirectives, ControlGroup} from 'angular2/forms';
-
 import { NameList } from 'services/NameList';
-import { EmailValidator } from 'services/Validators';
+
 
 
 @Component({
@@ -41,31 +37,8 @@ class SampleApp {
 }
 
 
-@Component({
-    selector: 'sample-form',
-    injectables: [FormBuilder]
-})
-
-@View({
-	templateUrl: './templates/sample-form.html',
-	directives: [ formDirectives, If]
-})
-
-
-class SampleForm {
-
-  form: ControlGroup;
-
-   constructor(builder: FormBuilder) {
-     this.form = builder.group({
-       username: ["larry", Validators.required],
-       email: ["",  EmailValidator.email  ]
-     });
-   }
- }
 
 export function main(){
 	bootstrap(SampleApp);
-	bootstrap(SampleForm);
 }
 
