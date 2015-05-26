@@ -1,7 +1,7 @@
 import {
 	ComponentAnnotation as Component, 
 	ViewAnnotation as View, 
-	For,
+	NgFor,
 	bootstrap
 } from 'angular2/angular2';
 
@@ -15,7 +15,7 @@ import { NameList } from 'services/NameList';
 
 @View({
 	templateUrl: './templates/sample-app.html',
-	directives: [For]
+	directives: [NgFor]
 })
 
 class SampleApp {

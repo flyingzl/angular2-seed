@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "author": "flyingzl(flyingzl@gmail.com)",
+  "repository": {
+    "type": "git",
+    "url":  "https://github.com/flyingzl/angular2-seed"
+  },
   "license": "MIT",
   "devDependencies": {
     "del": "~1.1.1",
@@ -19,7 +23,7 @@
   },
   
   "dependencies": {
-    "angular2": "2.0.0-alpha.23",
+    "angular2": "2.0.0-alpha.25",
     "es6-module-loader": "0.16.5",
     "systemjs": "0.16.7",
     "reflect-metadata": "0.1.0"

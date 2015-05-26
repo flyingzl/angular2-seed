@@ -44,7 +44,7 @@
         <button (click)="addName(newname)">增加</button>
     </p>
     <ul>
-        <li *for="#name of names">{{name}} 
+        <li *ng-for="#name of names">{{name}} 
             <button class="close" (click)="removeName(name)">&times;</button>
         </li>
     </ul>
