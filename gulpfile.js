@@ -90,7 +90,7 @@ gulp.task('connect', function() {
     connect.server({
         root: __dirname + '/dist',
         port: port,
-        livereload: true
+        livereload: false
     });
 });
 
