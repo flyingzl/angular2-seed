@@ -18,26 +18,24 @@
         <sample-form>正在加载中...</sample-form>
     </section>
 
-    <!-- ES6-related imports -->
-    <script src="lib/traceur-runtime.js"></script>
-    <script src="lib/es6-module-loader-sans-promises.src.js"></script>
-    <script src="lib/extension-register.js"></script>
-    <script src="lib/reflect.js"></script>
+    <!-- ES6 -->
+    <script src="/lib/traceur-runtime.js"></script>
+    <script src="/lib/system.js"></script>
+    <script src="/lib/angular2/bundles/angular2.dev.js"></script>
+    <!-- App -->
     <script>
-    register(System);
-    </script>
-
-    <!-- Angular2-related imports -->
-    <script src="lib/zone.js"></script>
-    <script src="lib/long-stack-trace-zone.js"></script>
-    <script src="lib/angular2.js"></script>
-
-    <!-- Application bootstrap logic -->
-    <script>
-    System.import('form')
-        .then(function(app) {
+        System.defaultJSExtensions = true;
+        System.config({
+            paths: {
+                'angular2/*': '/lib/angular2/*'
+            },
+            map: {
+                rx: '/lib/rx.js'
+            }
+        });
+        System.import('form').then(function (app) {
             app.main();
-        }, function(e) {
+        }, function (e) {
             console.error('Boostrap angular2 failed!', e);
         });
     </script>

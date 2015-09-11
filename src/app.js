@@ -1,6 +1,6 @@
 import {
-	ComponentAnnotation as Component, 
-	ViewAnnotation as View, 
+	Component,
+    View,
 	NgFor,
 	bootstrap
 } from 'angular2/angular2';

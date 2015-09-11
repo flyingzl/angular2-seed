@@ -17,14 +17,16 @@ var PATHS = {
         html: 'src/**/*.html'
     },
     lib: [
-        'node_modules/gulp-traceur/node_modules/traceur/bin/traceur-runtime.js',
-        'node_modules/es6-module-loader/dist/es6-module-loader-sans-promises.src.js',
-        'node_modules/systemjs/lib/extension-register.js',
-        'node_modules/angular2/node_modules/zone.js/dist/zone.js',
-        'node_modules/angular2/node_modules/zone.js/dist/long-stack-trace-zone.js',
+        'node_modules/angular2/node_modules/traceur/bin/traceur-runtime.js',
+        'node_modules/angular2/node_modules/rx/dist/rx.js',
         'node_modules/reflect-metadata/Reflect.js',
-        'node_modules/reflect-metadata/Reflect.js.map',
-    ]
+        'node_modules/zone.js/dist/zone.js',
+        'node_modules/zone.js/dist/long-stack-trace-zone.js',
+        '!node_modules/systemjs/dist/*.src.js',
+        'node_modules/systemjs/dist/*.js'
+    ],
+    dist: 'dist',
+    distLib : 'dist/lib'
 };
 
 
@@ -49,33 +51,27 @@ gulp.task('js', function() {
         .pipe(rename({
             extname: '.js'
         })) //hack, see: https://github.com/sindresorhus/gulp-traceur/issues/54
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest(PATHS.dist));
 });
 
 gulp.task('html', function() {
     return gulp.src(PATHS.src.html)
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest(PATHS.dist));
 });
 
 gulp.task('angular2', function() {
 
-    var buildConfig = {
-        paths: {
-            "angular2/*": "node_modules/angular2/es6/prod/*.es6",
-            "rx": "node_modules/angular2/node_modules/rx/dist/rx.js"
-        },
-        meta: {
-            // auto-detection fails to detect properly here - https://github.com/systemjs/builder/issues/123
-            'rx': {
-                format: 'cjs'
-            }
-        }
-    };
-
-    var Builder = require('systemjs-builder');
-    var builder = new Builder(buildConfig);
-
-    return builder.build('angular2/angular2', 'dist/lib/angular2.js', {});
+    return gulp
+        .src([
+            '!node_modules/angular2/node_modules/**',
+            '!node_modules/angular2/es6/**',
+            '!node_modules/angular2/ts/**',
+            '!node_modules/angular2/angular2.api.js',
+            '!node_modules/angular2/angular2_sfx.js',
+            '!node_modules/angular2/angular2.api.js',
+            'node_modules/angular2/**/*.js'
+        ])
+        .pipe(gulp.dest(PATHS.distLib + '/angular2'));
 });
 
 gulp.task('libs', ['angular2'], function() {
@@ -85,7 +81,7 @@ gulp.task('libs', ['angular2'], function() {
             showFiles: true,
             gzip: true
         }))
-        .pipe(gulp.dest('dist/lib'));
+        .pipe(gulp.dest(PATHS.distLib));
 });
 
 
@@ -106,7 +102,7 @@ gulp.task('open', function() {
         .pipe(open('', options));
 });
 
-gulp.task('build', ['js', 'html'])
+gulp.task('build', ['js', 'html']);
 gulp.task('default', ['build', 'libs']);
 gulp.task('serve', ['connect', 'open']);
 gulp.task('clean', function(done) {

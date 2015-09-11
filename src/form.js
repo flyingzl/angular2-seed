@@ -1,22 +1,22 @@
 import {
-	ComponentAnnotation as Component, 
-	ViewAnnotation as View, 
+    Component,
+	View,
 	bootstrap,
-  NgIf
+    NgIf
 } from 'angular2/angular2';
 
-import { FormBuilder, Validators, formDirectives, ControlGroup} from 'angular2/forms';
+import { FormBuilder, Validators, FORM_DIRECTIVES, ControlGroup} from 'angular2/forms';
 
 import { EmailValidator } from 'services/Validators';
 
 @Component({
     selector: 'sample-form',
-    appInjector: [FormBuilder]
+    viewBindings: [FormBuilder]
 })
 
 @View({
 	templateUrl: './templates/sample-form.html',
-	directives: [ formDirectives, NgIf]
+	directives: [ FORM_DIRECTIVES, NgIf]
 })
 
 
