@@ -36,15 +36,16 @@
 <section class="sample-app-content">
 
     <p>
-        恭喜您，Angular2顺利跑起来啦!
+        Yeah..! Angular2 is running now !
     </p>
 
     <p>
-        <input #newname>
-        <button (click)="addName(newname)">增加</button>
+        <input [(ng-model)]="name">
+        <button (click)="addName(name)">Add</button>
     </p>
     <ul>
-        <li *ng-for="#name of names">{{name}} 
+        <li *ng-for="#name of names;#i=index">
+            {{i}} - {{name}} 
             <button class="close" (click)="removeName(name)">&times;</button>
         </li>
     </ul>

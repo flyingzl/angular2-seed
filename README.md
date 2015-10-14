@@ -8,11 +8,7 @@ Angular2 seed project to help to run angular2 out of the box
 
 - run `npm install`
 
-- run `gulp`
-
-- run `gulp serve` 
-
-- Open another terminal, run `gulp watch`
+- run `gulp play`
 
 
 ![screenshoot](screenshot.png)
