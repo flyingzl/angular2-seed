@@ -1,6 +1,5 @@
 import {
 	Component,
-    View,
 	CORE_DIRECTIVES,
     FORM_DIRECTIVES,
 	bootstrap
@@ -12,11 +11,9 @@ import { NameList } from 'services/NameList';
 
 @Component({
     selector: 'sample-app',
-    viewProviders: [NameList]
-})
-@View({
-	templateUrl: './templates/sample-app.html',
-	directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
+    viewProviders: [NameList],
+    templateUrl: './templates/sample-app.html',
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
 class SampleApp {
     names: Array<string>;

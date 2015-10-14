@@ -1,6 +1,5 @@
 import { 
     Component,
-    View, 
     bootstrap,
     FormBuilder, 
     Validators, 
@@ -15,12 +14,9 @@ import { EmailValidator } from 'services/Validators';
 
 @Component({
     selector: 'sample-form',
-    viewBindings: [FormBuilder]
-})
-
-@View({
-	templateUrl: './templates/sample-form.html',
-	directives: [ FORM_DIRECTIVES, CORE_DIRECTIVES]
+    viewBindings: [FormBuilder],
+    templateUrl: './templates/sample-form.html',
+    directives: [ FORM_DIRECTIVES, CORE_DIRECTIVES]
 })
 
 
