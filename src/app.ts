@@ -12,7 +12,7 @@ import { NameList } from 'services/NameList';
 
 @Component({
     selector: 'sample-app',
-    viewBindings: [NameList]
+    viewProviders: [NameList]
 })
 @View({
 	templateUrl: './templates/sample-app.html',
