@@ -30,7 +30,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8">
-            <button  [disabled]="!form.valid" class="btn btn-primary">Start Invitation</button>
+            <button (click)="collectData()" [disabled]="!form.valid" class="btn btn-primary">Start Invitation</button>
         </div>
     </div>
 

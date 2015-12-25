@@ -31,6 +31,10 @@ class SampleForm {
        email:  this.email
     });
    }
+
+   collectData(){
+     alert(JSON.stringify(this.form.value))
+   }
  }
 
 export function main(){
