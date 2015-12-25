@@ -40,11 +40,11 @@
     </p>
 
     <p>
-        <input [(ng-model)]="name">
+        <input [(ngModel)]="name">
         <button (click)="addName(name)">Add</button>
     </p>
     <ul>
-        <li *ng-for="#name of names;#i=index">
+        <li *ngFor="#name of names;#i=index">
             {{i}} - {{name}} 
             <button class="close" (click)="removeName(name)">&times;</button>
         </li>

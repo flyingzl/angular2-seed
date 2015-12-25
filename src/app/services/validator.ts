@@ -1,4 +1,4 @@
-import {  Control, Validators } from 'angular2/angular2';
+import {  Control, Validators } from 'angular2/common';
 
 interface ValidationResult{
    [key:string]:boolean;

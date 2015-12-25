@@ -1,16 +1,17 @@
-import { Component,bootstrap, provide } from "angular2/angular2";
+import { Component, provide } from "angular2/core";
+import {bootstrap} from "angular2/platform/browser";
+
 import {
-    ROUTER_DIRECTIVES, 
     ROUTER_PROVIDERS, 
-    RouteConfig, 
-    RouteParams,
+    ROUTER_DIRECTIVES,
     Location,
     LocationStrategy, 
     HashLocationStrategy,
-    ROUTER_PRIMARY_COMPONENT
+    RouteParams,
+    RouteConfig
 } from "angular2/router";
     
-// Video组件
+// Video Component
 @Component({ 
     selector: "my-video",
     template: `
@@ -21,7 +22,7 @@ import {
 })
 class Video { }
         
-//Music 组件
+//Music Component
 @Component({ 
     selector: "my-music",
     template: `
@@ -36,24 +37,20 @@ class Music {
     }
  }
     
-//App组件
 @Component({ 
-    selector: "my-app",
+    selector: "my-router",
     directives: [ROUTER_DIRECTIVES],
     template : `
-        <!--声明路由入口-->
         <nav>
-            <b [router-link]="['/Video']">video</b> | 
-            <b [router-link]="['/Music', {id:'xx'}]">music</b>
+            <b [routerLink]="['/Video']">video</b> | 
+            <b [routerLink]="['/Music', {id:'params'}]">music</b>
         </nav>
         <main>
-            <!--声明路由出口-->
             <router-outlet></router-outlet>
         </main>
     `
 
 })
-//路由配置注解
 @RouteConfig([
     {path: "/video", component: Video, as: "Video" },
     {path:"/music/:id", component:Music, as:"Music"}
@@ -63,11 +60,10 @@ class App{
         location.go('/video');
     }     
 }
-    
-         
+       
 export function main(){
     bootstrap(App, [
         ROUTER_PROVIDERS,
-        provide(LocationStrategy, {useClass: HashLocationStrategy})
+        provide(LocationStrategy, { useClass: HashLocationStrategy })
     ]);
 }

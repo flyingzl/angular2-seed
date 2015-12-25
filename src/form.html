@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Angular2 seed</title>
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
     <style>
-        .sample-form-content{
-            margin-top: 30px;
-        }
+    .sample-form-content {
+        margin-top: 30px;
+    }
     </style>
 </head>
 
 <body>
-	
+
+    <!-- 1. Load libraries -->
+    <script src="libs/angular2-polyfills.js"></script>
+    <script src="libs/system.src.js"></script>
+    <script src="libs/Rx.js"></script>
+    <script src="libs/angular2.dev.js"></script>
+    <!-- 2. Configure SystemJS -->
+    <script>
+    System.config({
+        packages: {
+            app: {
+                format: 'register',
+                defaultExtension: 'js'
+            }
+        }
+    });
+
+    System.import('app/form').then(function(app) {
+        app.main();
+    }).catch(console.error.bind(console));
+    </script>
+
     <section class="container sample-form-content">
         <sample-form>Loading</sample-form>
     </section>
-
-    <script src="/libs/system-csp-production.js"></script>
-    <script>System.config({defaultJSExtensions: true});</script>
-    <script src="/libs/angular2.dev.js"></script>
-    <script>
-        System.import('form').then(function (app) {
-            app.main();
-        }).catch(console.error.bind(console));
-    </script>
 </body>
 
 </html>

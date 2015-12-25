@@ -1,14 +1,14 @@
 import { Component, OnInit } from "angular2/core";
 import {bootstrap} from "angular2/platform/browser";
-import NameList  from 'services/NameList';
+import NameList from './services/namelist-service';
 
 @Component({
     selector: 'sample-app',
     providers: [NameList],
-    templateUrl: './templates/sample-app.html',
+    templateUrl: 'app/templates/sample-app.html',
     directives: []
 })
-export default class SampleApp {
+class SampleApp {
     names: Array<string>;
     name: string;
     constructor(private _service:NameList) {

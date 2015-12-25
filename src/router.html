@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Angular2 router</title>
+    <title>Angular2 seed</title>
 </head>
 
 <body>
-	
-    <section >
-        <my-app>Loading</my-app>
-    </section>
-
-    <script src="/libs/system-csp-production.js"></script>
-    <script>System.config({defaultJSExtensions: true});</script>
-    <script src="/libs/angular2.dev.js"></script>
-    <script src="/libs/router.dev.js"></script>
+    <!-- 1. Load libraries -->
+    <script src="libs/angular2-polyfills.js"></script>
+    <script src="libs/system.src.js"></script>
+    <script src="libs/Rx.js"></script>
+    <script src="libs/angular2.dev.js"></script>
+    <script src="libs/router.dev.js"></script>
+    <!-- 2. Configure SystemJS -->
     <script>
-        System.import('router').then(function (app) {
+      System.config({
+        packages: {        
+          app: {
+            format: 'register',
+            defaultExtension: 'js'
+          }
+        }
+      });
+
+        System.import('app/router').then(function(app) {
             app.main();
         }).catch(console.error.bind(console));
     </script>
+
+    <my-router>Loading...</my-router>
 </body>
 
 </html>
