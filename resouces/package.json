@@ -15,7 +15,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "angular2-hmr": "^0.7.0",
     "autoprefixer": "^6.3.6",
     "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.9.1",
@@ -32,11 +31,7 @@
     "install": "^0.8.1",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
-    "npm": "^3.9.3",
     "style-loader": "^0.13.1",
-    "ts-loader": "^0.8.2",
-    "typescript": "^1.8.10",
-    "typings": "^1.0.4",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
