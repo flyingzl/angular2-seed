@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-import 'zone.js/dist/zone';
 
 import { Component, OnInit, ReflectiveInjector } from "@angular/core";
 import {bootstrap} from '@angular/platform-browser-dynamic';
