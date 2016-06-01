@@ -44,7 +44,7 @@
         <button (click)="addName(name)">Add</button>
     </p>
     <ul>
-        <li *ngFor="#name of names;#i=index">
+        <li *ngFor="let name of names;let i = index">
             {{i}} - {{name}} 
             <button class="close" (click)="removeName(name)">&times;</button>
         </li>

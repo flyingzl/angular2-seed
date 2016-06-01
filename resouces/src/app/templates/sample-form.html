@@ -1,8 +1,8 @@
 <form class="form-horizontal" [ngFormModel] ="form" >
     <div class="form-group" [class.has-error] = "form.dirty && !username.valid">
-        <label class="col-sm-4 control-label required" for="user">Invitation Name</label>
+        <label class="col-sm-4 control-label required" for="username">Invitation Name</label>
         <div class="col-sm-8">
-            <input required type="text" class="form-control" ngControl="username" />
+            <input required type="text" id="username" class="form-control" ngControl="username" />
             <div *ngIf="username.touched && !username.valid">
                 <p class="help-block" *ngIf="username.errors.required">
                     User name is required.
@@ -14,7 +14,7 @@
     <div class="form-group" [class.has-error] = "form.dirty && !email.valid">
         <label class="col-sm-4 control-label required" for="email">Email</label>
         <div class="col-sm-8">
-            <input required type="text" class="form-control" ngControl="email" />
+            <input required type="text" id="email" class="form-control" ngControl="email" />
             <div *ngIf="email.dirty && !email.valid">
                 <p class="help-block" *ngIf="email.errors.required">
                     Email is required.
