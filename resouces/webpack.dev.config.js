@@ -89,13 +89,7 @@ var config = {
                     limit: 100,
                     name: 'fonts/[name].[ext]'
                 }
-            },
-
-			{
-				test: /\.html$/,
-				loader: "file?name=[name].[ext]",
-				exclude: /templates/
-			}
+            }
         ]
     }
 };

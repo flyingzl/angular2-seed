@@ -13,9 +13,9 @@ Angular2 seed project to help to run angular2 out of the box
 
 # Demos
 
-* [Basic](http://localhost:3000/src/app/index.html)
-* [Form & Form validation](http://localhost:3000/src/app/form.html)
-* [Router](http://localhost:3000/src/app/router.html)
+* [Basic](http://localhost:3000/index.html)
+* [Form & Form validation](http://localhost:3000/form.html)
+* [Router](http://localhost:3000/router.html)
 
 
 ![screenshoot](screenshot.png)
