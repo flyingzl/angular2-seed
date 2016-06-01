@@ -48,10 +48,14 @@ class Music {
 
 })
 @Routes([
-    new Route({path: '/video', component: Video, useAsDefault: true }),
+    new Route({path: '/video', component: Video }),
     new Route({path:'/music/:id', component:Music })
 ])
-class App{}
+class App{
+    constructor(location:Location) {
+        location.go('/video');
+    }
+}
 
 bootstrap(App, [
     ROUTER_PROVIDERS,
