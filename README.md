@@ -4,6 +4,8 @@ Angular2 seed project to help to run angular2 out of the box
 
 # How to start
 
+- `cd resouces`
+
 - run `npm install`
 
 - run `npm run start`
