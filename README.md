@@ -1,7 +1,7 @@
 # angular2-seed
 Angular2 seed project to help to run angular2 out of the box.
 
-*Note*: I have changed gulp to webpack with babel now,  since the latter is more powerful and popular.
+**Note**: I have switched [gulp](http://gulpjs.com/) to [webpack](https://webpack.github.io/) with [babel](https://babeljs.io/) now,  since the latter is more powerful and popular.
 
 
 # How to start
