@@ -1,8 +1,8 @@
-<form class="form-horizontal" [ngFormModel] ="form" >
-    <div class="form-group" [class.has-error] = "form.dirty && !username.valid">
+<form class="form-horizontal" [ngFormModel]="form">
+    <div class="form-group" [class.has-error]="form.dirty && !username.valid">
         <label class="col-sm-4 control-label required" for="username">Invitation Name</label>
         <div class="col-sm-8">
-            <input required type="text" id="username" class="form-control" ngControl="username" />
+            <input required type="text" id="username" class="form-control" ngControl="username" [(ngModel)]="userInfo.username" />
             <div *ngIf="username.touched && !username.valid">
                 <p class="help-block" *ngIf="username.errors.required">
                     User name is required.
@@ -10,11 +10,10 @@
             </div>
         </div>
     </div>
-
-    <div class="form-group" [class.has-error] = "form.dirty && !email.valid">
+    <div class="form-group" [class.has-error]="form.dirty && !email.valid">
         <label class="col-sm-4 control-label required" for="email">Email</label>
         <div class="col-sm-8">
-            <input required type="text" id="email" class="form-control" ngControl="email" />
+            <input required type="text" id="email" class="form-control" ngControl="email" [(ngModel)]="userInfo.email" />
             <div *ngIf="email.dirty && !email.valid">
                 <p class="help-block" *ngIf="email.errors.required">
                     Email is required.
@@ -25,16 +24,38 @@
             </div>
         </div>
     </div>
-
-
-
+    <div class="form-group">
+        <label class="col-sm-4 control-label">Sex</label>
+        <div class="col-sm-8">
+            <radio-group [(model)]="userInfo.gender">
+                <label class='radio-inline'>
+                    <input type='radio' radio-box value='male' /> Male
+                </label>
+                <label class='radio-inline'>
+                    <input type='radio' radio-box value='female' /> Female
+                </label>
+            </radio-group>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label">Hobbies</label>
+        <div class="col-sm-8">
+            <checkbox-group [(model)]="userInfo.hobbies">
+                <label class='checkbox-inline'>
+                    <input type='checkbox' check-box value='swimming' /> Swimming
+                </label>
+                <label class='checkbox-inline'>
+                    <input type='checkbox' check-box value='walking' /> Walking
+                </label>
+                <label class='checkbox-inline'>
+                    <input type='checkbox' check-box value='shopping' /> Shopping
+                </label>
+            </checkbox-group>
+        </div>
+    </div>
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8">
             <button (click)="collectData()" [disabled]="!form.valid" class="btn btn-primary">Start Invitation</button>
         </div>
     </div>
-
 </form>
-
-
-

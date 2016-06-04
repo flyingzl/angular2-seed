@@ -1,40 +1,49 @@
 import { Component } from "@angular/core";
-import {bootstrap} from '@angular/platform-browser-dynamic';
+import { bootstrap } from '@angular/platform-browser-dynamic';
 import {
-FormBuilder,
-Validators,
-Control,
-ControlGroup,
-FORM_DIRECTIVES
+    FormBuilder,
+    Validators,
+    Control,
+    ControlGroup,
+    FORM_DIRECTIVES
 } from "@angular/common";
 
+import {RADIO_GROUP_DIRECTIVES} from "ng2-radio-group";
+
+
 import { EmailValidator } from './services/validator';
+
 
 @Component({
     selector: 'sample-form',
     providers: [FormBuilder],
     template: require('raw!./templates/sample-form.html'),
-    directives: [ FORM_DIRECTIVES]
+    directives: [FORM_DIRECTIVES,RADIO_GROUP_DIRECTIVES]
 })
 
 class SampleForm {
 
-  form: ControlGroup;
-  username: Control;
-  email: Control;
+    constructor(builder: FormBuilder) {
 
-  constructor(builder: FormBuilder) {
-    this.username = new Control("larry", Validators.required);
-    this.email = new Control("", EmailValidator.email);
-    this.form = builder.group( {
-       username:  this.username,
-       email:  this.email
-    });
-   }
+        this.userInfo = {
+            username: 'larry',
+            email: '',
+            gender: 'female',
+            hobbies: ['shopping']
+      
+        }
 
-   collectData(){
-     alert(JSON.stringify(this.form.value))
-   }
- }
+        this.username = new Control(this.userInfo.username, Validators.required);
+        this.email = new Control(this.userInfo.email, EmailValidator.email);
+        this.form = builder.group({
+            username: this.username,
+            email: this.email        
+        });
+    }
+
+    collectData() {
+        alert(JSON.stringify(this.userInfo))
+    }
+}
 
 bootstrap(SampleForm);
