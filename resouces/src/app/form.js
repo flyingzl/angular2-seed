@@ -3,8 +3,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
-import { CheckboxGroup } from "ng2-select-controls";
-
 import { EmailValidator } from './services/validator';
 
 
