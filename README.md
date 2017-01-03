@@ -4,6 +4,9 @@ Angular2 seed project to help to run angular2 out of the box.
 **Note**: I have switched [gulp](http://gulpjs.com/) to [webpack](https://webpack.github.io/) with [babel](https://babeljs.io/) now,  since the latter is more powerful and popular.
 
 
+NOTICE SINCERELY TO ALL YOU GUYS: `ANGULAR2` IS REALLY AN AWFUL FRAMEWORK, IF YOU WANNA MAKE YOUR LIFE BETTER, PLEASE EMBRAE [REACT](https://github.com/TCL-MIG-FE/react-web-spa-startkit) OR [VUE](https://github.com/TCL-MIG-FE/vue-web-spa-startkit).
+
+
 # How to start
 
 - `cd resouces`
