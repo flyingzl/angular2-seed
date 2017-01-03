@@ -1,24 +1,24 @@
-<form class="form-horizontal" [ngFormModel]="form">
-    <div class="form-group" [class.has-error]="form.dirty && !username.valid">
+<form class="form-horizontal" novalidate  [formGroup]='user' (ngSubmit)="submitForm(user.value)">
+    <div class="form-group" [class.has-error]="user.get('username').touched && user.get('username').invalid">
         <label class="col-sm-4 control-label required" for="username">Invitation Name</label>
         <div class="col-sm-8">
-            <input required type="text" id="username" class="form-control" ngControl="username" [(ngModel)]="userInfo.username" />
-            <div *ngIf="username.touched && !username.valid">
-                <p class="help-block" *ngIf="username.errors.required">
+            <input required type="text" class="form-control" formControlName='username'/>
+            <div *ngIf="user.get('username').touched && user.get('username').invalid">
+                <p class="help-block" *ngIf="user.get('username').errors.required">
                     User name is required.
                 </p>
             </div>
         </div>
     </div>
-    <div class="form-group" [class.has-error]="form.dirty && !email.valid">
+    <div class="form-group" [class.has-error]="user.get('email').touched && user.get('email').invalid">
         <label class="col-sm-4 control-label required" for="email">Email</label>
         <div class="col-sm-8">
-            <input required type="text" id="email" class="form-control" ngControl="email" [(ngModel)]="userInfo.email" />
-            <div *ngIf="email.dirty && !email.valid">
-                <p class="help-block" *ngIf="email.errors.required">
+            <input required type="text" class="form-control" formControlName='email' emailValidator/>
+            <div *ngIf="user.get('email').touched && user.get('email').invalid">
+                <p class="help-block" *ngIf="user.get('email').errors.required">
                     Email is required.
                 </p>
-                <p class="help-block" *ngIf="email.errors.email">
+                <p class="help-block" *ngIf="!user.get('email').errors.required && user.get('email').errors.email">
                     Email is not valid.
                 </p>
             </div>
@@ -27,35 +27,31 @@
     <div class="form-group">
         <label class="col-sm-4 control-label">Sex</label>
         <div class="col-sm-8">
-            <radio-group [(model)]="userInfo.gender">
-                <label class='radio-inline'>
-                    <input type='radio' radio-box value='male' /> Male
-                </label>
-                <label class='radio-inline'>
-                    <input type='radio' radio-box value='female' /> Female
-                </label>
-            </radio-group>
+            <label class='radio-inline'>
+                <input type='radio' formControlName='gender' value='male' /> Male
+            </label>
+            <label class='radio-inline'>
+                <input type='radio' formControlName='gender' value='female' /> Female
+            </label>
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-4 control-label">Hobbies</label>
         <div class="col-sm-8">
-            <checkbox-group [(model)]="userInfo.hobbies">
-                <label class='checkbox-inline'>
-                    <input type='checkbox' check-box value='swimming' /> Swimming
-                </label>
-                <label class='checkbox-inline'>
-                    <input type='checkbox' check-box value='walking' /> Walking
-                </label>
-                <label class='checkbox-inline'>
-                    <input type='checkbox' check-box value='shopping' /> Shopping
-                </label>
-            </checkbox-group>
+            <label class='checkbox-inline'>
+                <input type='checkbox' [checked]="checkHobbyState('swimming')" (change)='changeHobby($event)'  value='swimming' /> Swimming
+            </label>
+            <label class='checkbox-inline'>
+                <input type='checkbox' [checked]="checkHobbyState('walking')" (change)='changeHobby($event)' value='walking' /> Walking
+            </label>
+            <label class='checkbox-inline'>
+                <input type='checkbox' [checked]="checkHobbyState('shopping')" (change)='changeHobby($event)' value='shopping' /> Shopping
+            </label>
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8">
-            <button (click)="collectData()" [disabled]="!form.valid" class="btn btn-primary">Start Invitation</button>
+            <button type='submit' [disabled]="user.invalid" class="btn btn-primary">Start Invitation</button>
         </div>
     </div>
 </form>

@@ -1,15 +1,14 @@
-import { Component, provide } from '@angular/core';
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {LocationStrategy, HashLocationStrategy, Location} from '@angular/common';
-import {
-	Routes,
-	Route,
-	ROUTER_PROVIDERS,
-	ROUTER_DIRECTIVES
-} from '@angular/router';
-    
+import { Component, OnInit, NgModule } from "@angular/core";
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, ActivatedRoute, Params } from '@angular/router';
+
+import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy } from '@angular/common';
+
+
+
 // Video Component
-@Component({ 
+@Component({
     selector: 'my-video',
     template: `
             <h1>I LOVE THIS VIDEO!</h1>
@@ -17,10 +16,10 @@ import {
 
     styles: [`h1{background:#0f0;}`]
 })
-class Video { }
-        
+class Video {}
+
 //Music Component
-@Component({ 
+@Component({
     selector: 'my-music',
     template: `
             <h1>THAT'S FANTASTIC MUSIC!, RoutParams: {{id}}</h1>
@@ -28,18 +27,24 @@ class Video { }
     styles: [`h1{background:#f00;}`]
 })
 class Music {
-	routerOnActivate(curr, prev, currTree, prevTree) {
-		this.id =  curr.getParam('id');
-	}
- }
-    
-@Component({ 
+    constructor(route: ActivatedRoute) {
+        this.route = route;
+    }
+    ngOnInit() {
+        this.route.params.forEach(params => {
+            if (params['id']) {
+                this.id = params['id']
+            }
+        })
+    }
+}
+
+@Component({
     selector: 'my-router',
-	directives: [ROUTER_DIRECTIVES],
-    template : `
+    template: `
         <nav>
             <a [routerLink]="['/video']">video</a> | 
-            <a [routerLink]="['/music','idParams']">music</a>
+            <a [routerLink]="['/music','see_you_again']">music</a>
         </nav>
         <main>
             <router-outlet></router-outlet>
@@ -47,17 +52,26 @@ class Music {
     `
 
 })
-@Routes([
-    new Route({path: '/video', component: Video }),
-    new Route({path:'/music/:id', component:Music })
-])
-class App{
-    constructor(location:Location) {
-        location.go('/video');
-    }
-}
+class RouterApp {}
 
-bootstrap(App, [
-    ROUTER_PROVIDERS,
-    provide(LocationStrategy, { useClass: HashLocationStrategy })
-]);
+
+const routes: Routes = [
+    { path: '', redirectTo: '/video', pathMatch: 'full' },
+    { path: 'video', component: Video },
+    { path: 'music/:id', component: Music }
+];
+
+
+@NgModule({
+    imports: [BrowserModule, RouterModule, RouterModule.forRoot(routes)],
+    declarations: [RouterApp, Video, Music],
+    providers: [
+        { provide: APP_BASE_HREF, useValue: '!' },
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
+    ],
+    bootstrap: [RouterApp]
+})
+export class AppModule {}
+
+
+platformBrowserDynamic().bootstrapModule(AppModule);

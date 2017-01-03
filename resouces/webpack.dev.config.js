@@ -16,7 +16,9 @@ var config = {
             'zone.js/dist/zone',
             '@angular/core',
             '@angular/platform-browser-dynamic',
+            '@angular/platform-browser',
             '@angular/common',
+            '@angular/forms',
             '@angular/router'
         ]
     },

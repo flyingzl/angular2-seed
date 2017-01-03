@@ -1,7 +1,9 @@
 
-import { Component, OnInit, ReflectiveInjector } from "@angular/core";
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {CountryService} from './services/service';
+import { Component, OnInit, NgModule } from "@angular/core";
+import { platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule} from '@angular/forms'
+import { CountryService} from './services/service';
 
 @Component({
     selector: 'sample-app',
@@ -10,11 +12,10 @@ import {CountryService} from './services/service';
 })
 class SampleApp {
 
-	countryService: CountryService;
+    name = ''
 
     constructor(countryService:CountryService) {
-		this.countryService = countryService;
-        this.name = '';
+        this.countryService = countryService;
     }
 
     ngOnInit(){
@@ -33,7 +34,15 @@ class SampleApp {
 }
 
 
-bootstrap(SampleApp );
+@NgModule({
+  imports:      [ BrowserModule, FormsModule],
+  declarations: [ SampleApp ],
+  bootstrap:    [ SampleApp ]
+})
+export class AppModule { }
+
+
+platformBrowserDynamic().bootstrapModule(AppModule );
 
 
 

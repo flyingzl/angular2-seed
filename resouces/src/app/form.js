@@ -1,49 +1,65 @@
-import { Component } from "@angular/core";
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import {
-    FormBuilder,
-    Validators,
-    Control,
-    ControlGroup,
-    FORM_DIRECTIVES
-} from "@angular/common";
+import { Component, NgModule } from "@angular/core";
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 
-import {RADIO_GROUP_DIRECTIVES} from "ng2-radio-group";
-
+import { CheckboxGroup } from "ng2-select-controls";
 
 import { EmailValidator } from './services/validator';
 
 
 @Component({
     selector: 'sample-form',
-    providers: [FormBuilder],
-    template: require('raw!./templates/sample-form.html'),
-    directives: [FORM_DIRECTIVES,RADIO_GROUP_DIRECTIVES]
+    template: require('raw!./templates/sample-form.html')
 })
 
 class SampleForm {
 
-    constructor(builder: FormBuilder) {
+    constructor(fb: FormBuilder) {
 
-        this.userInfo = {
-            username: 'larry',
-            email: '',
-            gender: 'female',
-            hobbies: ['shopping']
-      
-        }
+        this.user = fb.group({
+            username: ['larry', Validators.required, ],
+            email: [null, Validators.required],
+            gender: 'male',
+            hobbies: [ ['shopping'] ]
+        }); 
 
-        this.username = new Control(this.userInfo.username, Validators.required);
-        this.email = new Control(this.userInfo.email, EmailValidator.email);
-        this.form = builder.group({
-            username: this.username,
-            email: this.email        
+        this.user.valueChanges.subscribe(form => {
+            console.log('form changed to:', form);
         });
+
     }
 
-    collectData() {
-        alert(JSON.stringify(this.userInfo))
+    checkHobbyState(value){
+        return this.user.get('hobbies').value.indexOf(value) >= 0
+    }
+
+
+    changeHobby($event){
+        const $target = $event.target;
+        const value = $target.value;
+        const checked = $target.checked;
+        const currentHobbies = this.user.get('hobbies');
+
+        if( checked ){
+            currentHobbies.setValue(currentHobbies.value.concat(value))
+        }else{
+            currentHobbies.setValue( currentHobbies.value.filter( item => item !== value))    
+        }
+    }
+
+    submitForm(value: any) {
+        alert(JSON.stringify(value))
     }
 }
 
-bootstrap(SampleForm);
+
+@NgModule({
+    imports: [BrowserModule, ReactiveFormsModule],
+    declarations: [SampleForm, EmailValidator, CheckboxGroup],
+    bootstrap: [SampleForm]
+})
+export class AppModule {}
+
+
+platformBrowserDynamic().bootstrapModule(AppModule);

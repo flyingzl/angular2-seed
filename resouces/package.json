@@ -38,15 +38,15 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "@angular/common": "2.0.0-rc.1",
-    "@angular/compiler": "2.0.0-rc.1",
-    "@angular/core": "2.0.0-rc.1",
-    "@angular/platform-browser": "2.0.0-rc.1",
-    "@angular/platform-browser-dynamic": "2.0.0-rc.1",
-    "@angular/router": "2.0.0-rc.1",
+    "@angular/common": "^2.4.1",
+    "@angular/compiler": "^2.4.1",
+    "@angular/core": "^2.4.1",
+    "@angular/forms": "^2.4.1",
+    "@angular/platform-browser": "^2.4.1",
+    "@angular/platform-browser-dynamic": "^2.4.1",
+    "@angular/router": "^3.4.1",
     "babel-polyfill": "^6.8.0",
-    "ng2-radio-group": "0.0.4",
-    "rxjs": "5.0.0-beta.6",
-    "zone.js": "0.6.12"
+    "rxjs": "^5.0.2",
+    "zone.js": "^0.7.4"
   }
 }
